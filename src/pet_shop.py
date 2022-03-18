@@ -17,11 +17,13 @@ def get_stock_count(pet_shop):
     return len(pet_shop["pets"])
 
 def get_pets_by_breed(pet_shop, breed):
-    of_breed = []
-    for pet in pet_shop["pets"]:
-        if pet["breed"] == breed:
-            of_breed.append(pet)
-    return of_breed
+    return [pet for pet in pet_shop["pets"] if pet["breed"] == breed]
+    # More longwinded way without using list comprehension:
+    # of_breed = []
+    # for pet in pet_shop["pets"]:
+    #     if pet["breed"] == breed:
+    #         of_breed.append(pet)
+    # return of_breed
 
 def find_pet_by_name(pet_shop, pet_name):
     for pet in pet_shop["pets"]:
@@ -58,8 +60,18 @@ def customer_can_afford_pet(customer, pet):
     # else:
     #     return False
 
+# This next one wasn't explicitly specified in the testing,
+# but what it does is required for the next one.
+# It would probably be equally valid to just put the contents into the
+# next function directly, but I figured a more modular approach was better.
+# The "find pet by name" function returns the pet rather than a boolean,
+# and it has to return None for one of the tests to pass, so I couldn't
+# use that on its own as a way of returning T/F here.
+def is_pet_in_stock(pet_shop, pet):
+    return pet in pet_shop["pets"]
+
 def sell_pet_to_customer(pet_shop, pet, customer):
-    if pet in pet_shop["pets"] and customer_can_afford_pet(customer, pet):
+    if is_pet_in_stock(pet_shop, pet) and customer_can_afford_pet(customer, pet):
         remove_customer_cash(customer, pet["price"])
         add_or_remove_cash(pet_shop, pet["price"])
         remove_pet_by_name(pet_shop, pet["name"])
