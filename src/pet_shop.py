@@ -5,13 +5,13 @@ def get_total_cash(pet_shop):
     return pet_shop["admin"]["total_cash"]
 
 def add_or_remove_cash(pet_shop, transact):
-    pet_shop["admin"]["total_cash"] = pet_shop["admin"]["total_cash"] + transact
+    pet_shop["admin"]["total_cash"] += transact
 
 def get_pets_sold(pet_shop):
     return pet_shop["admin"]["pets_sold"]
 
 def increase_pets_sold(pet_shop, sales):
-    pet_shop["admin"]["pets_sold"] = pet_shop["admin"]["pets_sold"] + sales
+    pet_shop["admin"]["pets_sold"] += sales
 
 def get_stock_count(pet_shop):
     return len(pet_shop["pets"])
@@ -42,7 +42,7 @@ def get_customer_cash(customer):
     return customer["cash"]
 
 def remove_customer_cash(customer, transact):
-    customer["cash"] = customer["cash"] - transact
+    customer["cash"] -= transact
 
 def get_customer_pet_count(customer):
     return len(customer["pets"])
